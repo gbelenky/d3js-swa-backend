@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "d3js_swa_backend": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7253",
+      "launchBrowser": false
+    }
+  }
+}
