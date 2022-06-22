@@ -14,10 +14,10 @@ namespace gbelenky.d3jsswa
     {
         [FunctionName("GetBarData")]
         public static IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("GetScatterData function processed a request.");
+            log.LogInformation("GetBarData function processed a request.");
             
             string jsonString = JsonSerializer.Serialize(new FrameworkData().items);
             return new OkObjectResult(jsonString);
