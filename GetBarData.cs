@@ -6,6 +6,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
 namespace gbelenky.d3jsswa
 {
@@ -17,7 +18,9 @@ namespace gbelenky.d3jsswa
             ILogger log)
         {
             log.LogInformation("GetScatterData function processed a request.");
-            return new OkObjectResult(new FrameworkData().items);
+            
+            string jsonString = JsonSerializer.Serialize(new FrameworkData().items);
+            return new OkObjectResult(jsonString);
         }
     }
 }
