@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace gbelenky.d3jsswa
 {
@@ -14,12 +15,17 @@ namespace gbelenky.d3jsswa
     {
         [FunctionName("GetBarData")]
         public static IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,[CosmosDB(
+                databaseName: "d3js-swa-frameworks",
+                collectionName: "frameworks",
+                ConnectionStringSetting = "CosmosDBConnectionString",
+                SqlQuery ="SELECT * FROM c ")] IEnumerable<FrameworkDataItem> frameworks,
             ILogger log)
         {
             log.LogInformation("GetBarData function processed a request.");
             
-            string jsonString = JsonSerializer.Serialize(new FrameworkData().items);
+            // needed just to keep the Pascal case formatting 
+            string jsonString = JsonSerializer.Serialize(frameworks);
             return new OkObjectResult(jsonString);
         }
     }
