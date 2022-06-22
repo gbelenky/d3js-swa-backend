@@ -15,7 +15,7 @@ namespace gbelenky.d3jsswa
     {
         [FunctionName("GetBarData")]
         public static IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,[CosmosDB(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,[CosmosDB(
                 databaseName: "d3js-swa-frameworks",
                 collectionName: "frameworks",
                 ConnectionStringSetting = "CosmosDBConnectionString",
